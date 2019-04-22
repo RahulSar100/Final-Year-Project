@@ -4,7 +4,7 @@
 	<title>REGISTARTION</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="assets/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
@@ -12,13 +12,13 @@
 	<link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="assets/css/util.css">
@@ -47,6 +47,66 @@ $(document).ready(function(){
  $("#form")[0].reset();  /* To reset all fields of the form */
  });
 });
+$(document).ready(function(){
+	$("#fName").blur(function(){
+		var x= $("#fName").val;
+		var checkOnlyChars = /^[A-Za-z]+$/;
+    if(!x.match(checkOnlyChars))
+    {
+	   alert("Only chars are allowed");
+	   return false;
+    }
+	});
+	$("#mName").blur(function(){
+	 var x= $("#mName").val;
+	 var checkOnlyChars = /^[A-Za-z]+$/;
+		if(!x.match(checkOnlyChars))
+		{
+		alert("Only chars are allowed");
+		return false;
+		}
+ });
+ $("#lName").blur(function(){
+	 var x= $("#lName").val;
+	 var checkOnlyChars = /^[A-Za-z]+$/;
+	 if(!x.match(checkOnlyChars))
+	 {
+		alert("Only chars are allowed");
+		return false;
+	 }
+ });
+});
+
+function init()
+	{
+
+		if (window.XMLHttpRequest)
+		{	// code for IE7+, Firefox, Chrome, Opera, Safari
+			a=new XMLHttpRequest();
+			return a;
+		}
+		else
+		{	// code for IE6, IE5
+			a=new ActiveXObject("Microsoft.XMLHTTP");
+			return xmlhttp;
+		}
+	}
+
+		function validate_email()
+		{
+			var xmlhttp = init();
+			var email = document.getElementById('email').value;
+			xmlhttp.onreadystatechange=function()
+			{
+				if(xmlhttp.readyState==4)
+				{
+					document.getElementById('em_check').innerHTML=xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET","validate_email.php?email="+email,true);
+			xmlhttp.send();
+		}
+
 </script>
 <style type="text/css">
 .btn-format{
@@ -73,73 +133,78 @@ $(document).ready(function(){
 						<input class="input100" type="text" id="mname" title="mName" placeholder="Middle Name" name='mname' >
 						<span class="focus-input100"></span>
 					</div>
-					
+
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your Last Name">
 						<input class="input100" type="text" id="lname" title="lName" placeholder="Last Name" name='lname' />
 						<span class="focus-input100"></span>
 					</div>
-					
+
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your Date of Birth">
 						<input class="input100" type="date" id="dob" title="dob" placeholder="Date of Birth" name='dob'  />
 						<span class="focus-input100"></span>
 					</div>
-					
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your Valid Email Address">
-						<input class="input100" type="email" id="email" title="Email ID" placeholder="Email ID" name='email' />
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your Valid Email Address" >
+						<input class="input100" type="email" id="email" title="Email ID" placeholder="Email ID" name='email' onblur="validate_email()" />
 						<span class="focus-input100"></span>
-					</div>
-					
+					</div>	<span style="margin-left:20px;color:red;font-family:verdana;font-size:13px;" id="em_check"></span>
+
+
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your Valid Mobile Number">
 						<input class="input100" type="text" id="mobile" title="Mobile number" placeholder="Mobile number" name='mobile' />
 						<span class="focus-input100"></span>
 					</div>
-					
+
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please create a Password.">
 						<input class="input100" type="password" id="password" title="Create Password" placeholder="Create Password" name='password'/>
 						<span class="focus-input100"></span>
 					</div>
-					
+
 					<div class="wrap-input100 validate-input" data-validate = "Enter the Same Password which you created.">
 						<input  class="input100" type="password" id="cpassword" title="Confirm Password" placeholder="Confirm Password" name='cpassword'/>
 						<span class="focus-input100"></span>
 					</div>
-                      
+
 					  <br>
                     <div class="wrap-input100 validate-input;"><span style="margin-left:50px;">
 						Gender:</span><span style="margin-left:10px;"><input type="radio" id="gender" name="gender" value="Male"/>Male</span>
                                <span style="margin-left:10px;"><input type="radio" id="gender" name="gender" value="Female"/>Female</span>
                                <span style="margin-left:10px;"><input type="radio" id="gender" name="gender" value="others"/>Others</span>
-							   
+
 					</div>
-					
+
 					<span class="btn-format" style="padding:1em 2em;margin:2em;margin-left:3em;">
-					  <button type="submit" style="color: #1b3815;" >
+					  <button type="submit" style="color: #1b3815;"  >
 					    REGISTER
 					  </button>
 				    </span>
-        
-		 
+
+
 		            <span class="btn-format" style="padding:1em 2.5em;">
 					 <button  type="button" id="clear" >
 						RESET
 					 </button>
 				    </span>
-					
+
 					<div class="flex-col-c p-t-170 p-b-40">
 						<span class="txt1 p-b-9">
 							Already have an account?
 						</span>
-
-						<a href="#" class="txt3">
+						<a href="login.html" class="txt3">
 							Sign in now
 						</a>
+						<br>
+						<a href="index.html" class="txt3">
+							Home
+						</a>
 					</div>
+					<br>
 				</form>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 <!--===============================================================================================-->
 	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -158,4 +223,4 @@ $(document).ready(function(){
 	<script src="assets/js/main1.js"></script>
 
 </body>
-</html> 
+</html>
